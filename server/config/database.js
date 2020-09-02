@@ -25,10 +25,10 @@ const dbConnectionURL = {
     // mongodb+srv://dbUser:<password>@cluster0.7bkd7.mongodb.net/<dbname>?retryWrites=true&w=majority
     //'mongodb://mongo:27017/myDB';
 };
-mongoose.connect(dbConnectionURL.LOCALURL, options);
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'Mongodb Connection Error:' + dbConnectionURL.LOCALURL));
+mongoose.connect(dbConnectionURL.LOCALURL, options)
+const db = mongoose.connection
+db.on('error', console.error.bind(console, 'Mongodb Connection Error:' + dbConnectionURL.LOCALURL))
 db.once('open', () => {
      // we're connected !
-     console.log('###### ======== Mongodb Connection Successful ========= ########');
+     console.log('###### ======== Mongodb Connection Successful ========= ########')
 });

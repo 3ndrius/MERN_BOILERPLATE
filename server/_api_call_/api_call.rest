@@ -10,10 +10,10 @@ content-type: application/json
 
 ###
 
-GET http://localhost:8080/posts
+GET http://localhost:8080/posts/
 ###
 
-PATCH  http://localhost:8080/posts/5f391b1ab7e18b0082d7da26
+PATCH  http://localhost:8080/posts/5f4fb21ed14b8a05be244f0f
 content-type: application/json
 
 {
@@ -21,4 +21,4 @@ content-type: application/json
 }
 ###
 
-DELETE http://localhost:8080/posts/5f391b5391b53f009045f5dd
+DELETE http://localhost:8080/posts/5f4fb21ed14b8a05be244f0f

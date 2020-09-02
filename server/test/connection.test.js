@@ -1,6 +1,7 @@
 
 // hooks 
 require('../config/database')
+const mongoose = require('mongoose')
 
 // before test check connection 
 describe('hooks before', () => {
@@ -17,4 +18,9 @@ describe('hooks before', () => {
         done()
     })
 
+})
+beforeEach((done) => {
+    mongoose.connection.collections.posts.drop(() => {
+        done();
+    })
 })
