@@ -22,9 +22,9 @@ describe('Save post record', function() {
 
 
 describe('Finds records in database', function () {
-
+    let post;
     beforeEach(function(done) {
-        let post = new Post({
+        post = new Post({
             title: 'First post'
         });
         post.save().then(()=>{
@@ -37,6 +37,12 @@ describe('Finds records in database', function () {
 
         Post.findOne({title: 'First post'}).then(function(res) {
             assert(res.title === 'First post');
+            done();
+        })
+    });
+    it('Find post by id', (done) => {
+        Post.findById(post._id).then((res) => {
+            assert(post._id.toString === res._id.toString);
             done();
         })
     })
