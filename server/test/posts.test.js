@@ -2,7 +2,7 @@ const mocha = require('mocha');
 const assert = require('assert');
 const Post = require('../src/models/post.model');
 
-describe('Save post record', function() {
+describe('Save post record', function () {
 
     //test save
     it('Save a record correctly', function (done) {
@@ -10,32 +10,29 @@ describe('Save post record', function() {
             title: "Just new title"
 
         })
-        post.save().then(function() {
+        post.save().then(function () {
             assert(post.isNew === false)
             done()
         })
-
     })
-
-    // test next
 })
 
 
 describe('Finds records in database', function () {
     let post;
-    beforeEach(function(done) {
+    beforeEach(function (done) {
         post = new Post({
             title: 'First post'
         });
-        post.save().then(()=>{
+        post.save().then(() => {
             assert(post.isNew === false);
             done();
         })
     })
 
-    it('Find one record from the database', function(done) {
+    it('Find one record from the database', function (done) {
 
-        Post.findOne({title: 'First post'}).then(function(res) {
+        Post.findOne({ title: 'First post' }).then(function (res) {
             assert(res.title === 'First post');
             done();
         })
@@ -55,14 +52,14 @@ describe('Delete post record from database', () => {
         post = new Post({
             title: "New Post"
         });
-        post.save().then(() =>{
+        post.save().then(() => {
             assert(post.isNew === false);
             done();
         })
     });
     it('Delete one record from database', (done) => {
-        Post.findOneAndRemove({title: "New Post"}).then(() =>{
-            Post.findOne({title: "New Post"}).then((result) =>{
+        Post.findOneAndRemove({ title: "New Post" }).then(() => {
+            Post.findOne({ title: "New Post" }).then((result) => {
                 assert(result === null);
                 done();
             })
@@ -71,28 +68,28 @@ describe('Delete post record from database', () => {
 
 });
 
-describe('Update record in database', ()=> {
-     let post;
+describe('Update record in database', () => {
+    let post;
     beforeEach((done) => {
         post = new Post({
             title: "New Post"
         });
-        post.save().then(() =>{
+        post.save().then(() => {
             assert(post.isNew === false);
             done();
         })
     });
     it('Find record and update', (done) => {
-        Post.findOneAndUpdate({title: "New Post"}, {title: "Changed title"}).then(()=>{
-            Post.findOne({_id: post._id}).then(res => {
+        Post.findOneAndUpdate({ title: "New Post" }, { title: "Changed title" }).then(() => {
+            Post.findOne({ _id: post._id }).then(res => {
                 assert(res.title === 'Changed title');
                 done();
             })
         })
     })
-     it('Find record and update check false positive', (done) => {
-        Post.findOneAndUpdate({title: "New Post"}, {title: "Changed title"}).then(()=>{
-            Post.findOne({_id: post._id}).then(res => {
+    it('Find record and update check false positive', (done) => {
+        Post.findOneAndUpdate({ title: "New Post" }, { $set: { title: "Changed title" } }).then(() => {
+            Post.findOne({ _id: post._id }).then(res => {
                 assert(res.title !== 'Changed title1');
                 done();
             })
