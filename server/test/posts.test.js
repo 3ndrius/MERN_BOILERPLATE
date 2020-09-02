@@ -47,4 +47,55 @@ describe('Finds records in database', function () {
         })
     })
 
+});
+
+describe('Delete post record from database', () => {
+    let post;
+    beforeEach((done) => {
+        post = new Post({
+            title: "New Post"
+        });
+        post.save().then(() =>{
+            assert(post.isNew === false);
+            done();
+        })
+    });
+    it('Delete one record from database', (done) => {
+        Post.findOneAndRemove({title: "New Post"}).then(() =>{
+            Post.findOne({title: "New Post"}).then((result) =>{
+                assert(result === null);
+                done();
+            })
+        })
+    });
+
+});
+
+describe('Update record in database', ()=> {
+     let post;
+    beforeEach((done) => {
+        post = new Post({
+            title: "New Post"
+        });
+        post.save().then(() =>{
+            assert(post.isNew === false);
+            done();
+        })
+    });
+    it('Find record and update', (done) => {
+        Post.findOneAndUpdate({title: "New Post"}, {title: "Changed title"}).then(()=>{
+            Post.findOne({_id: post._id}).then(res => {
+                assert(res.title === 'Changed title');
+                done();
+            })
+        })
+    })
+     it('Find record and update check false positive', (done) => {
+        Post.findOneAndUpdate({title: "New Post"}, {title: "Changed title"}).then(()=>{
+            Post.findOne({_id: post._id}).then(res => {
+                assert(res.title !== 'Changed title1');
+                done();
+            })
+        })
+    })
 })
