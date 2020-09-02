@@ -1,7 +1,7 @@
 # Production Build
 
 # Stage 1: Build react client
-FROM node:12-alpinee as client
+FROM node:12-alpine as client
 
 # Working directory be app
 WORKDIR /usr/app/client/
