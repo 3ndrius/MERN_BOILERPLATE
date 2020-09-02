@@ -1,7 +1,5 @@
 // testing mocha is working correctly
-const mocha = require('mocha');
 const assert = require('assert');
-
 
 describe('some demo test ', function() {
 
