@@ -35,7 +35,7 @@ The App should be up at http://localhost:8080
 ## STACK
 
 - current CRA_react-app v3.4.1 / react v16.13.1
-- nodejs 12-alphine (see docker file)
+- nodejs 12-alpine (see docker file)
 - express
 - mongodb local (no-sql database)
 - mongooose v5.10.0 
@@ -48,9 +48,15 @@ The App should be up at http://localhost:8080
 
 ## TEST API CONNECTION 
 
-- install rest api client (vscode extension)
-- open file __test__
-- test api call
+Manual test
+- install rest api client (vscode extension) / or use postman
+- test api call using rest client (api_call directory)
+
+Automatic test
+ - run docker-compose
+ - hit `docker exec -it <cont it> sh`
+ - run `npm run test`
+
 
 
 
